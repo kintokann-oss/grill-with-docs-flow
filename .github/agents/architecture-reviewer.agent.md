@@ -17,6 +17,7 @@ You are the Architecture Reviewer. After all issues in a task are implemented, y
 
 - @.github/skills/improve-architecture.md
 - @.github/skills/code-review.md
+- @.github/skills/codebase-design.md
 
 ## Input
 
@@ -94,7 +95,11 @@ PASS | PASS WITH SUGGESTIONS | NEEDS REFACTORING
 
 ## Output
 
-1. `review.md` — structured review findings and suggestions
+1. `.github/working/review.md` — structured review findings and suggestions
+
+After completing the review, update `state.yaml`:
+- Set `phases.review.status: done`
+- Set `status: completed`
 
 ## Rules
 

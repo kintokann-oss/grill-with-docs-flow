@@ -14,6 +14,7 @@ Hard rules that all agents follow without asking the user.
 | Frontend code (TDD) | FE Developer | Build |
 | Architecture assessment | Architecture Reviewer | Review |
 | Template extraction (on-demand) | Requirements | — |
+| Cascade changes across all planning artifacts | Change Propagator | Cross-phase |
 
 No agent crosses into another agent's concern.
 
@@ -36,7 +37,9 @@ Agents ONLY load files relevant to their current step. Do NOT load all rules, al
 - **Orchestrator:** Load issues.md + state.yaml + context. Do NOT load coding rules.
 - **BE Developer:** Load issue + context + vocabulary + backend/sql/testing/clean-code rules. Skip frontend rules entirely.
 - **FE Developer:** Load issue + context + vocabulary + frontend/theming/i18n/react/clean-code rules. Skip backend/sql rules entirely.
-- **Architecture Reviewer:** Load context + architecture rules + what was changed. Load other rules only when checking specific violations.
+- **Architecture Reviewer:** Load context + architecture rules + codebase-design + what was changed. Load other rules only when checking specific violations.
+- **Change Propagator:** Load change-propagation skill + affected artifacts + state.yaml. Do NOT load coding rules.
+- **Requirements:** Load template-extract skill + example document only.
 
 ## Phase Flow (Mandatory Order)
 
@@ -95,9 +98,24 @@ All developer agents follow red-green-refactor:
 
 ## State Tracking
 
-The Orchestrator maintains `state.yaml` with two tiers:
-- **Top:** Current phase (understand/specify/decompose/build/review)
-- **Build:** Per-issue status (pending/in_progress/done/failed)
+State tracking begins in Phase 1. The **Planner creates `state.yaml`** at the start of grilling, not the Orchestrator.
+
+- **Phase 1 (Understand):** Planner creates `state.yaml` with `current_phase: understand` and tracks sub-steps (grilling status, glossary/context/ADR updates)
+- **Phase 2-3:** Each agent updates its phase status to `in_progress` on start and `done` on completion
+- **Phase 4 (Build):** Orchestrator adds the issues section and tracks per-issue status (pending/in_progress/done/failed)
+- **Every new chat:** The active agent reads `state.yaml` first to know where things stand
+
+## Change Propagation (Mandatory)
+
+When any planning artifact is edited and the change could ripple to other artifacts, the editing agent MUST invoke the **Change Propagator** agent (`.github/agents/change-propagator.agent.md`).
+
+The Change Propagator:
+- Owns the full cascade matrix — knows every artifact dependency
+- Updates everything affected in one atomic pass
+- Announces every file it updated and every file it checked
+- Is the ONLY agent that should propagate changes across multiple artifacts
+
+Other agents do NOT propagate changes themselves. They make their own edit, then delegate to the Change Propagator for the ripple.
 
 ## Failure Handling
 

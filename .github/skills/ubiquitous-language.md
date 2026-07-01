@@ -50,8 +50,7 @@ After updating the glossary:
 
 When a term changes:
 - Update `UBIQUITOUS_LANGUAGE.md`
-- Update `CONTEXT.md` if the term appears there
-- Flag code that needs renaming (but don't rename in this skill — that's a dev task)
+- For cross-artifact cascades (updating CONTEXT.md, prd.md, issues.md, etc.), invoke the **Change Propagator** agent rather than doing it yourself
 
 ## File Location
 

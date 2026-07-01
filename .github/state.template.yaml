@@ -1,39 +1,60 @@
-# Two-Tier State File Template
-# Created by the Orchestrator when a task enters the Build phase.
-# Tracks both high-level phases and per-issue progress.
+# State File Template
+# Created by the Planner at the start of Phase 1 (Understand).
+# Tracks high-level phases, per-phase sub-steps, and per-issue progress.
 
-task: "<feature title from PRD>"
+task: "<feature title from user's request>"
 status: in_progress  # in_progress | completed | blocked
 
 # Phase tracking (top tier)
-current_phase: build  # understand | specify | decompose | build | review
+current_phase: understand  # understand | specify | decompose | build | review
+
 phases:
-  understand: done      # Planner completed grilling
-  specify: done         # Spec Writer produced PRD
-  decompose: done       # Task Decomposer produced issues
-  build: in_progress    # Orchestrator executing issues
-  review: pending       # Architecture Reviewer waiting
+  # Phase 1: Planner grills the user to reach shared understanding
+  understand:
+    status: in_progress  # pending | in_progress | done
+    grilling: in_progress  # in_progress | done
+    glossary_updated: false
+    context_updated: false
+    adrs_created: []  # e.g. [ADR-002-feature-name.md]
 
-# Issue tracking (second tier, only during build phase)
-current_issue: 1
-issues:
-  - id: 1
-    title: "<tracer bullet — first end-to-end slice>"
-    agents: [be-developer, fe-developer]
-    blocked_by: []
-    status: pending  # pending | in_progress | done | failed
+  # Phase 2: Spec Writer formalizes grilling into PRD
+  specify:
+    status: pending  # pending | in_progress | done
 
-  - id: 2
-    title: "<second issue title>"
-    agents: [be-developer]
-    blocked_by: [1]
-    status: pending
+  # Phase 3: Task Decomposer breaks PRD into vertical-slice issues
+  decompose:
+    status: pending  # pending | in_progress | done
 
-  - id: 3
-    title: "<third issue title>"
-    agents: [fe-developer]
-    blocked_by: [1]
-    status: pending
+  # Phase 4: Orchestrator dispatches developers per issue
+  build:
+    status: pending  # pending | in_progress | done
 
-# Orchestrator updates this file after each agent completes work.
+  # Phase 5: Architecture Reviewer assesses completed work
+  review:
+    status: pending  # pending | in_progress | done
+
+# Issue tracking (added by Orchestrator at start of Phase 4)
+# current_issue: 1
+# issues:
+#   - id: 1
+#     title: "<tracer bullet — first end-to-end slice>"
+#     agents: [be-developer, fe-developer]
+#     blocked_by: []
+#     status: pending  # pending | in_progress | done | failed
+#
+#   - id: 2
+#     title: "<second issue title>"
+#     agents: [be-developer]
+#     blocked_by: [1]
+#     status: pending
+#
+#   - id: 3
+#     title: "<third issue title>"
+#     agents: [fe-developer]
+#     blocked_by: [1]
+#     status: pending
+
+# Each agent updates this file after completing its work.
+# The Planner creates this file at the start of Phase 1.
+# The Orchestrator adds the issues section at the start of Phase 4.
 # When all issues are done, current_phase advances to "review".

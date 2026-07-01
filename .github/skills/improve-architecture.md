@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Systematically identify structural problems in the codebase that make it harder for agents (and humans) to understand, test, and extend. Proposes concrete deepening opportunities.
+Surface architectural friction and propose deepening opportunities — refactors that turn shallow modules into deep ones. The aim is testability and AI-navigability.
 
 ## When to Use
 
@@ -10,83 +10,57 @@ Systematically identify structural problems in the codebase that make it harder 
 - Periodically (weekly or after a surge of development)
 - When developers report confusion navigating the codebase
 
-## Method
+## Process
 
-### 1. Explore Naturally
+### 1. Read Context First
 
-Don't follow a checklist mechanically. Read the code as a newcomer would:
-- Start at entry points (`main.py`, `App.tsx`)
-- Follow the call chain for a typical request
-- Notice where you get confused, lost, or have to bounce between files
+Read `CONTEXT.md` for the domain glossary and any ADRs in the area you're touching. Use domain vocabulary for everything — if `CONTEXT.md` defines "Order," talk about "the Order module," not "the FooBarHandler."
 
-### 2. Identify Confusions
+### 2. Explore Naturally
 
-Look for these patterns:
+Walk the codebase organically. Note where you experience friction:
 
-**Shallow modules (too many tiny files):**
-- A concept requires reading 5+ files to understand
-- Functions are extracted into separate files "for organization" but are only called once
-- A folder has 15 files averaging 20 lines each
+- Where does understanding one concept require bouncing between many small modules?
+- Where are modules **shallow** — interface nearly as complex as the implementation?
+- Where have pure functions been extracted just for testability, but the real bugs hide in how they're called?
+- Where do tightly-coupled modules leak across their seams?
 
-**False testability extractions:**
-- Pure functions extracted just so they can be unit-tested in isolation
-- But the real bugs are in how they're combined (integration boundaries)
-- Tests pass but the feature is broken
+Apply the **deletion test** (from @.github/skills/codebase-design.md): would deleting a module concentrate complexity, or just move it?
 
-**Tight coupling masquerading as separation:**
-- Module A imports 5 things from Module B
-- Changes to B always require changes to A
-- They're in separate files but might as well be one
+### 3. Present Candidates
 
-**Leaky abstractions:**
-- Callers need to understand implementation details to use a module correctly
-- Error handling requires knowledge of the underlying library
-- Configuration bleeds through interfaces
+For each candidate, provide:
 
-### 3. Propose Deepening Opportunities
+- **Files** — which modules are involved
+- **Problem** — why the current architecture causes friction
+- **Solution** — what would change
+- **Benefits** — in terms of locality and leverage
+- **Recommendation strength** — `Strong`, `Worth exploring`, or `Speculative`
 
-For each problem, suggest ONE concrete improvement:
+End with a **top recommendation**: which candidate to tackle first and why.
 
-| Problem Type | Typical Solution |
-|-------------|-----------------|
-| Too many tiny files | Merge into one deeper module with a thin public interface |
-| False extraction | Inline back into the caller; test at the integration boundary instead |
-| Tight coupling | Extract a shared interface, or merge the coupled modules |
-| Leaky abstraction | Wrap with a facade that hides the complexity |
+**ADR conflicts**: if a candidate contradicts an existing ADR, only surface it when the friction is real enough to warrant revisiting. Don't list every theoretical refactor an ADR forbids.
 
-### 4. Prioritize
+Do NOT propose interfaces yet. Ask the user: "Which of these would you like to explore?"
 
-Rate each opportunity:
-- **HIGH:** Structural risk — will cause bugs or make future features harder
-- **MEDIUM:** Quality — makes code harder to understand but isn't immediately dangerous
-- **LOW:** Style — could be better but works fine as-is
+### 4. Grill Through the Chosen Candidate
 
-### 5. Present Options
+Once the user picks one, grill through it together:
+- Constraints and dependencies
+- The shape of the deepened module
+- What sits behind the seam
+- What tests survive the refactor
 
-For HIGH priority items, present 2-3 alternative designs with trade-offs:
-- Option A: [description] — Pros: ... Cons: ...
-- Option B: [description] — Pros: ... Cons: ...
-- Recommended: [which one and why]
+Update `CONTEXT.md` and offer ADRs as decisions crystallize during the conversation.
 
 ## Key Principle: Deep Modules
 
-> "The best modules are those that provide powerful functionality yet have simple interfaces." — John Ousterhout, A Philosophy of Software Design
-
-A **deep module** is:
-- Simple to use (thin interface: few params, clear purpose)
-- Complex inside (hides real-world messiness)
-- Self-contained (doesn't leak implementation)
-
-A **shallow module** is:
-- Complex to use (many params, need to understand internals)
-- Simple inside (just delegates or reorganizes)
-- Leaky (callers must know implementation details)
+See @.github/skills/codebase-design.md for the full vocabulary (module, interface, depth, seam, adapter, leverage, locality).
 
 **The goal is not fewer files. The goal is clearer boundaries.**
 
 ## Anti-Patterns
 
-- **Don't refactor everything** — only propose changes for real confusions, not theoretical purity
+- **Don't refactor everything** — only propose changes for real confusions
 - **Don't break working code** — proposals must preserve existing behavior
-- **Don't ignore the team** — if a pattern is well-understood by the team (even if "ugly"), that's OK
-- **Don't optimize for AI** — optimize for human understanding; AI benefits as a side effect
+- **Don't ignore the team** — if a pattern is well-understood (even if "ugly"), that's OK

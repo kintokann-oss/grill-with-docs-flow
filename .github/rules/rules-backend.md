@@ -43,7 +43,9 @@
 
 ## Testing
 
-- Write tests alongside implementation in `tests/`
+- Test files live in `tests/` — name them `test_<feature>.py`
 - Use TestClient for route testing
 - Use temp DB file for isolation (set `DATABASE_URL` in fixtures)
+- AAA pattern: Arrange → Act → Assert
+- Run: `cd apps/api && python -m pytest`
 - Tests must pass before reporting step complete
