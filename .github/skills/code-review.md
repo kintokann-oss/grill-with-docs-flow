@@ -55,7 +55,7 @@ Does the code conform to this repo's documented coding standards?
 
 - [ ] Components are accessible (semantic HTML, ARIA where needed)
 - [ ] User-facing text uses i18n keys (not hardcoded strings)
-- [ ] Styles follow the theme system (`rules-theming.md`)
+- [ ] Styles follow the theme system (`theme-rules.md`)
 - [ ] No inline styles that should be theme tokens
 
 ### Smell Baseline

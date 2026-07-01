@@ -202,18 +202,17 @@ After all issues are complete:
 │   └── template-extract.md            # Document template extraction
 │
 ├── rules/                              # Coding & orchestration conventions
+│   ├── clean-code.md                   # Clean code principles
+│   ├── react-best-practices.md         # React component patterns
+│   ├── react-hooks-and-effects-best-practices.md  # Hooks & effects patterns
 │   ├── rules-agent-decisions.md        # Hard orchestration rules
 │   ├── rules-architecture.md           # Monorepo layout
 │   ├── rules-backend.md               # FastAPI conventions
-│   ├── rules-clean-code.md            # Clean code principles
-│   ├── rules-clean-typescript.md      # TypeScript conventions
 │   ├── rules-frontend.md              # React conventions
 │   ├── rules-i18n.md                 # Internationalization
-│   ├── rules-react-best-practices.md  # React component patterns
 │   ├── rules-sql.md                   # Database conventions
 │   ├── rules-testing.md              # Test conventions
-│   ├── rules-theme.md                # Theme tokens
-│   └── rules-theming.md              # CSS token system
+│   └── theme-rules.md                # CSS token system
 │
 ├── context/                            # Living documentation
 │   ├── CONTEXT.md                     # System map (entities, relationships, API)

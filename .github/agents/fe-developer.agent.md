@@ -31,9 +31,12 @@ You are the Frontend Developer. You implement React frontend code using **Test-D
 |-----------|-----------|
 | `rules-frontend.md` | Always (you're the FE dev) |
 | `rules-architecture.md` | Always (boundary checks) |
-| `rules-theming.md` | When writing/modifying styles |
+| `theme-rules.md` | When writing/modifying styles |
+| `react-best-practices.md` | When writing components or hooks |
+| `react-hooks-and-effects-best-practices.md` | When writing hooks or effects |
 | `rules-i18n.md` | When adding user-facing text |
-| `rules-clean-code.md` | When writing implementation logic |
+| `rules-testing.md` | When writing tests |
+| `clean-code.md` | When writing implementation logic |
 
 Do NOT load: `rules-backend.md`, `rules-sql.md`
 
@@ -45,7 +48,7 @@ Read the issue description and acceptance criteria. Cross-reference with:
 - `UBIQUITOUS_LANGUAGE.md` for correct naming
 - `CONTEXT.md` for existing patterns
 - `rules-frontend.md` for conventions
-- `rules-theming.md` for styling patterns
+- `theme-rules.md` for styling patterns
 - `rules-i18n.md` for translation requirements
 
 ### 2. Design Interface First
@@ -114,5 +117,5 @@ After all behaviors are implemented and passing, run the code-review skill:
 - ALWAYS follow the red-green-refactor cycle.
 - ALWAYS use terms from `UBIQUITOUS_LANGUAGE.md` in code.
 - ALWAYS add i18n keys for user-facing text (no hardcoded strings).
-- ALWAYS follow `rules-frontend.md`, `rules-theming.md`, and `rules-i18n.md`.
+- ALWAYS follow `rules-frontend.md`, `theme-rules.md`, and `rules-i18n.md`.
 - If a test is hard to write, the interface needs redesigning — simplify first.

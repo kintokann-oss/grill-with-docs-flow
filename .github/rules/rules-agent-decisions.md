@@ -25,7 +25,7 @@ Agents ONLY load files relevant to their current step. Do NOT load all rules, al
 | Principle | Rule |
 |-----------|------|
 | **Load on need** | Only read a file when the current task requires information from it |
-| **Skip irrelevant rules** | If the issue is backend-only, do NOT load frontend rules (theming, i18n, react-best-practices) |
+| **Skip irrelevant rules** | If the issue is backend-only, do NOT load frontend rules (theme-rules, i18n, react-best-practices, react-hooks-and-effects-best-practices) |
 | **Skip irrelevant skills** | Only invoke a skill when the process calls for it (e.g., don't load TDD skill during planning) |
 | **Context first, details later** | Read CONTEXT.md and UBIQUITOUS_LANGUAGE.md first (lightweight). Only read specific rules when you're about to write code that falls under them |
 | **No full scans** | Never read every file in a directory "just in case" |
@@ -36,7 +36,7 @@ Agents ONLY load files relevant to their current step. Do NOT load all rules, al
 - **Task Decomposer:** Load PRD + context + architecture rules only.
 - **Orchestrator:** Load issues.md + state.yaml + context. Do NOT load coding rules.
 - **BE Developer:** Load issue + context + vocabulary + backend/sql/testing/clean-code rules. Skip frontend rules entirely.
-- **FE Developer:** Load issue + context + vocabulary + frontend/theming/i18n/react/clean-code rules. Skip backend/sql rules entirely.
+- **FE Developer:** Load issue + context + vocabulary + frontend/theme-rules/react-best-practices/react-hooks/i18n/testing/clean-code rules. Skip backend/sql rules entirely.
 - **Architecture Reviewer:** Load context + architecture rules + codebase-design + what was changed. Load other rules only when checking specific violations.
 - **Change Propagator:** Load change-propagation skill + affected artifacts + state.yaml. Do NOT load coding rules.
 - **Requirements:** Load template-extract skill + example document only.
