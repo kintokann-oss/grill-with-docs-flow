@@ -30,12 +30,12 @@ You are the Frontend Developer. You implement React frontend code using **Test-D
 |-----------|-----------|
 | `rules-frontend.md` | Always (you're the FE dev) |
 | `rules-architecture.md` | Always (boundary checks) |
-| `react-best-practices.md` | When writing components or hooks |
-| `rules-theming.md` + `theme.md` | When writing/modifying styles |
+| `rules-react-best-practices.md` | When writing components or hooks |
+| `rules-theming.md` + `rules-theme.md` | When writing/modifying styles |
 | `rules-i18n.md` | When adding user-facing text |
 | `rules-testing.md` | When writing tests |
-| `clean-code.md` | When writing implementation logic |
-| `clean-typescript.md` | When writing any TypeScript |
+| `rules-clean-code.md` | When writing implementation logic |
+| `rules-clean-typescript.md` | When writing any TypeScript |
 
 Do NOT load: `rules-backend.md`, `rules-sql.md`
 

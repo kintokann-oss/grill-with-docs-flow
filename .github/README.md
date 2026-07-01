@@ -189,14 +189,18 @@ After all issues are complete:
 │   └── template-extract.md            # Document template extraction
 │
 ├── rules/                              # Coding & orchestration conventions
-│   ├── agent-decisions.md              # Hard orchestration rules
+│   ├── rules-agent-decisions.md        # Hard orchestration rules
 │   ├── rules-architecture.md           # Monorepo layout
 │   ├── rules-backend.md               # FastAPI conventions
+│   ├── rules-clean-code.md            # Clean code principles
+│   ├── rules-clean-typescript.md      # TypeScript conventions
 │   ├── rules-frontend.md              # React conventions
+│   ├── rules-i18n.md                 # Internationalization
+│   ├── rules-react-best-practices.md  # React component patterns
 │   ├── rules-sql.md                   # Database conventions
 │   ├── rules-testing.md              # Test conventions
-│   ├── rules-theming.md              # CSS token system
-│   └── rules-i18n.md                 # Internationalization
+│   ├── rules-theme.md                # Theme tokens
+│   └── rules-theming.md              # CSS token system
 │
 ├── context/                            # Living documentation
 │   ├── CONTEXT.md                     # System map (entities, relationships, API)

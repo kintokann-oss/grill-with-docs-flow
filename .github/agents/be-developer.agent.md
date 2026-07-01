@@ -32,10 +32,10 @@ You are the Backend Developer. You implement FastAPI backend code using **Test-D
 | `rules-architecture.md` | Always (boundary checks) |
 | `rules-sql.md` | Only if the issue involves schema/migration/query work |
 | `rules-testing.md` | When writing tests |
-| `clean-code.md` | When writing implementation logic |
+| `rules-clean-code.md` | When writing implementation logic |
 
 
-Do NOT load: `rules-frontend.md`, `rules-theming.md`, `rules-i18n.md`, `theme.md`, `react-best-practices.md`
+Do NOT load: `rules-frontend.md`, `rules-theming.md`, `rules-i18n.md`, `rules-theme.md`, `rules-react-best-practices.md`
 
 ## Process
 

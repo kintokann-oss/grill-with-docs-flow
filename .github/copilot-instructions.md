@@ -95,5 +95,5 @@ The Orchestrator maintains `state.yaml` with:
 
 - Shared vocabulary: `.github/context/UBIQUITOUS_LANGUAGE.md`
 - Bounded context: `.github/context/CONTEXT.md`
-- Orchestration rules: `.github/rules/agent-decisions.md`
+- Orchestration rules: `.github/rules/rules-agent-decisions.md`
 - Architecture: `.github/rules/rules-architecture.md`
